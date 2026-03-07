@@ -48,11 +48,11 @@
       >
     </v-btn>
 
-    <ActivePlayerPopover
+    <!-- <ActivePlayerPopover
       auto-show
       align="end"
       child-element-id="active-player-popover"
-    />
+    /> -->
 
     <v-btn
       id="active-player-popover"

@@ -1,10 +1,10 @@
 <template>
-  <ActivePlayerPopover
+  <!-- <ActivePlayerPopover
     v-if="!store.mobileLayout && player && player.isVisible"
     auto-show
     align="end"
     child-element-id="extended-controls-speaker-button"
-  />
+  /> -->
 
   <SpeakerBtn id="extended-controls-speaker-button" :color="player.color" />
 
