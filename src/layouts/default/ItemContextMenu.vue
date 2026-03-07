@@ -10,6 +10,7 @@
     :scrim="!store.showPlayersMenu"
     style="z-index: 999999"
     z-index="999999"
+    location="top center"
     @update:model-value="
       (v) => {
         store.dialogActive = v;

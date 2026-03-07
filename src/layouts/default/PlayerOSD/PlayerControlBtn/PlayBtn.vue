@@ -8,6 +8,7 @@
     :icon="iconStyle ? `${baseIcon}-${iconStyle}` : baseIcon"
     variant="button"
     @click="api.playerCommandPlayPause(player.player_id)"
+    @contextmenu="openTransferOptions($event)"
   />
   <v-progress-circular
     v-if="isVisible && player && isLoading"
@@ -16,6 +17,8 @@
     :size="compProps.spinnerSize"
     :width="2"
   />
+
+  <PlayBtnContextMenu ref="playBtnContextMenuComponent" :player="player" />
 </template>
 
 <script setup lang="ts">
@@ -24,7 +27,8 @@ import Icon, { IconProps } from "@/components/Icon.vue";
 import api from "@/plugins/api";
 import { PlaybackState, Player, PlayerQueue } from "@/plugins/api/interfaces";
 import { useActiveSource } from "@/composables/activeSource";
-import { computed, toRef } from "vue";
+import { computed, toRef, ref } from "vue";
+import PlayBtnContextMenu from "./PlayBtnContextMenu.vue";
 
 // properties
 export interface Props {
@@ -81,6 +85,19 @@ const isLoading = computed(() => {
     compProps.playerQueue?.extra_attributes?.play_action_in_progress === true
   );
 });
+
+const playBtnContextMenuComponent = ref<InstanceType<
+  typeof PlayBtnContextMenu
+> | null>(null);
+
+const openTransferOptions = (event: Event) => {
+  event.preventDefault();
+
+  if (playBtnContextMenuComponent.value)
+    playBtnContextMenuComponent.value.openContextMenu(event);
+
+  return false;
+};
 </script>
 
 <style>
